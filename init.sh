@@ -1,4 +1,31 @@
+#!/bin/sh
 
+# DVC
+pipx install dvc[gdrive]
+
+# tinytex
+R -e 'install.packages("tinytex")'
+R -e 'tinytex::install_tinytex(force = TRUE)'
+
+# haranoaji font
+~/.local/bin/tlmgr install haranoaji
+
+# texcount
+~/.local/bin/tlmgr install texcount
+~/.local/bin/tlmgr path add
+
+# gnuplot-lua-tikz.sty
+mkdir ~/.TinyTeX/texmf-local/tex/latex/gnuplot
+cd  ~/.TinyTeX/texmf-local/tex/latex/gnuplot
+gnuplot -e "set term tikz createstyle"
+mktexlsr
+
+# PATH
+printf "%s\n" \
+       "export PATH=\$PATH:/home/rstudio/.local/bin" \
+       "export PATH=\$(echo \$PATH | awk -v RS=':' '!a[\$1]++ { if (NR > 1) printf RS; printf \$1 }')" \
+         > ~/.bashrc
+echo "source ~/.bashrc" > ~/.bash_profile
 
 # RStudio Font
 
