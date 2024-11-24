@@ -1,0 +1,82 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "lecture note(master)",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "bash",
+            "args": [
+                "/home/rstudio/pandoc/script/lecture_beamer.sh",
+                "-f",
+                "${fileBasename}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "lecture note(blank)",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "bash",
+            "args": [
+                "/home/rstudio/pandoc/script/lecture_beamer.sh",
+                "-b",
+                "-f",
+                "${fileBasename}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "lecture note(master) debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "bash",
+            "args": [
+                "/home/rstudio/pandoc/script/lecture_beamer.sh",
+                "-d",
+                "-f",
+                "${fileBasename}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "lecture note(blank) debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "bash",
+            "args": [
+                "/home/rstudio/pandoc/script/lecture_beamer.sh",
+                "-bd",
+                "-f",
+                "${fileBasename}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+    ]
+}
