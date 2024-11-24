@@ -1,0 +1,16 @@
+*
+*/
+
+!/README.md
+!/.gitignore
+
+!/Dockerfile
+!/docker-compose.yml
+
+!/init.sh
+
+!/pandoc**
+!/tasks.json
+
+.DS_Store
+.Rproj.user
