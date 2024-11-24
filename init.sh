@@ -18,7 +18,7 @@ R -e 'tinytex::install_tinytex(force = TRUE)'
 mkdir ~/.TinyTeX/texmf-local/tex/latex/gnuplot
 cd  ~/.TinyTeX/texmf-local/tex/latex/gnuplot
 gnuplot -e "set term tikz createstyle"
-mktexlsr
+~/.local/bin/mktexlsr
 
 # PATH
 printf "%s\n" \
