@@ -1,0 +1,17 @@
+services:
+  rstudio:
+    build:
+      context: .
+    container_name: Research-tools
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PASSWORD=rstudio
+      - TZ=Asia/Tokyo
+      - DISABLE_AUTH=true
+      - ROOT=true
+    ports:
+      - 8787:8787
+    volumes:
+      - .:/home/rstudio
+    restart: unless-stopped
