@@ -52,7 +52,7 @@ if [ -e HackGen_v$HACKGEN_VER.zip ]; then
 
 fi
 
-    unzip HackGen_v$HACKGEN_VER.zip -d temp
+    unzip HackGen_v$HACKGEN_VER.zip -d /home/rstudio/.config/rstudio/fonts/temp/
 
     mv temp/HackGen_v$HACKGEN_VER/HackGen-Regular.ttf HackGen/400
     mv temp/HackGen_v$HACKGEN_VER/HackGen-Bold.ttf HackGen/700
