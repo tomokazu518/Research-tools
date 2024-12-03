@@ -57,3 +57,5 @@ RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18
 RUN tar xf pandoc-crossref-Linux.tar.xz && \
     mv pandoc-crossref /usr/bin
 
+RUN rm /work/*.*
+RUN chown rstudio:rstudio /work && chmod 755 /work
