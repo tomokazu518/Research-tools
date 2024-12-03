@@ -76,9 +76,10 @@ fi
 rm -r temp
 
 if [ -e $BASENAME.gnuploterrors ]; then
-  rm $BASENAME.gnuploterrors
-  rm $BASENAME-gnuplottex-fig*.gnuplot
-  rm $BASENAME-gnuplottex-fig*.tex
+  rm -f $BASENAME.gnuploterrors
+  rm -f $BASENAME-gnuplottex-fig*.gnuplot
+  rm -f $BASENAME-gnuplottex-fig*.tex
+  rm -f $BASENAME-gnuplottex-fig*.pdf
 fi
 
 
