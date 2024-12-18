@@ -1,33 +1,39 @@
 # RStudioとLatexの研究環境
 
-## イメージに含まれているもの
+## コンテナの内容
 
 - ベースイメージはrocker/rstudio
   - R本体
   - RStudio Server
   - Pandoc
-- tidyverseとsfをインストールするのに必要なパッケージ  
-  (足りないものがあればDockerfileに追記)
-- IPAフォント，Notoフォント
-- Gnuplot
-- Ghostsctipt
-- Rのrenvパッケージ
-- RStudioでgithub copilotを利用可能に
-- [Pandoc-crosreff](https://github.com/lierdakil/pandoc-crossref)
-- 授業資料用のテンプレートとコンパイルするためのスクリプト
+- 追加したもの
+  - tidyverseとsfをインストールするのに必要なパッケージ   
+  - Gnuplot
+  - Ghostsctipt
+  - IPAフォント，Notoフォント
+  - Rのrenvパッケージ
+  - RStudioでgithub copilotを利用可能に
+  - [Pandoc-crosreff](https://github.com/lierdakil/pandoc-crossref)
 
 ## 導入の準備
 
-以下，Windowsの場合はPowerShellかコマンドプロンプト，Macの場合はターミナルでの操作
+以下，Windowsの場合はWSL，Macの場合はターミナルでの操作
 
-### Open SSHのインストール (Windowsの場合のみ)
+### gitの初期設定
 
-Windowsの場合は，OpenSSHに不具合があるので，不具合が解消されたBeta版をインストール
-```{cmd}
-winget install Microsoft.OpenSSH.Beta
+ユーザー名，メールアドレスを設定する。
+
+```{shell}
+git config --global user.name "ユーザー名"
+git config --global user.email メールアドレス
 ```
 
 ### 秘密鍵を作成してGithubに登録
+
+githubのアカウントがあることが前提
+ - だれでも作成可能
+ - アカデミック申請すれば，Proの機能も無料で使える
+ - とくにgithub copilotは便利
 
 githubにアクセスするための秘密鍵を作成
 ```{shell}
@@ -37,8 +43,8 @@ ssh-keygen -t ed25519
   - 保存場所はデフォルト(~/.ssh)でOkなので何も入力せずにEnter
   - パスフレーズも必要なければそのままEnter
 - ~/.sshフォルダにid_ed255119とid_ed25519.pubという2つのファイルができる
-  - id_ed25519.pubの方をテキスト・エディタなどで開いて，内容をコピー
-  - Githubのアカウント設定から，コピーしたSSH keyを追加
+  - 公開鍵 (id_ed25519.pubの方)をテキスト・エディタなどで開いて，内容をコピー
+  - Githubのアカウント設定 (画面右上)からSSH and GPG keysを選び，New SSH keyボタンを押す。Titleは適当に，Keyにはコピーした公開鍵を追加
 
 接続できることを確認
 ```
@@ -66,18 +72,15 @@ Macであればhomebrew
 ```
 brew install DockerDesktop
 ```
-Dockerのホームページからインストーラをダウンロードして実行してもOk
-- Windowsの場合はWSL2も同時にインストールされる
+
 - インストール後には再起動が必要
 
 ### レポジトリのクローン
 
-gitが使える場合には，レポジトリをクローン (Windowsの場合wsl上に)
+レポジトリをクローン (場所はホームフォルダなどわかりやすいところでOk，Windowsの場合wslファイルシステム上に)
 ```
 git clone git@github.com:tomokazu518/Research-tools.git
 ```
-gitが使えない場合は，githubからzipファイルをダウンロードして展開 (環境構築後，gitはコンテナ内のものを使えるので，ここでインストールする必要はない)
-
 フォルダ構成は以下
 
 <pre>
@@ -88,11 +91,13 @@ Research-tools
 ├── init.sh
 └── pandoc
     ├── script
+    │   ├── gnuplot.sh
     │   ├── lecture_beamer.sh
+    │   ├── tikz.sh
     └── templates
-        ├── beamer-with-notes.latex
-        ├── beamer-without-notes.latex
-        └── lecture_beamer.latex
+         ├── beamer-with-notes.latex
+         ├── beamer-without-notes.latex
+         └── lecture_beamer.latex
 </pre>
 
 ## Dockerイメージのビルドと起動
@@ -102,7 +107,7 @@ Research-tools
 cd Research-tools
 docker compose up -d
 ```
-ビルドには数十分かかるが，終わればコンテナが起動する (再起動後も自動起動する)
+ビルドにはそこそこの時間がかかるが，終わればコンテナが起動する (再起動後も自動起動する)
 
 ## 使い方
 
@@ -128,25 +133,17 @@ RStudio Serverにアクセスして，ターミナルから`init.sh`を実行す
 
 Research-toolsフォルダはホームフォルダ(/home/rstudio)としてマウントされるので，その中に`projects`というサブ・フォルダを作成し，さらにその中でプロジェクトごとのフォルダを作って使うことを想定している
 
-### Latex
-
-Visual Studio Codeの場合，使い方は2パターン
-- コンテナにアタッチして使う
-  - ファイルのパーミションの問題 (とくにWindows)があるので，コンテナにはrstudioユーザーで入る
-  - コンテナ構成ファイルに以下を追加
-  ```
-	"remoteUser": "rstudio"
-  ```
-- ローカルでソースを編集し，コンパイルはコンテナで行う
-  - LaTex Workshopの設定で，Docker Enabledにチェックを入れ，Imageにイメージ名を設定するだけで使える
-  - この場合，コンテナを起動させておく必要はない (コンパイルで呼び出したときにだけ起動される)
-  - Latexのコンパイルだけ使う(Rは使わない)なら，専用のコンテナを作るのも良い
-
 ### Python
 
 pipxでpythonのパッケージをインストールできる
 - ~/.local/binにインストールされる
 
+### Visual Studio Codeで使う
+
+Latexやquartoのソース編集などは，RStudioよりもVScodeの方が良い場合もある。VScodeをコンテナにアタッチして使うときには，ファイルのパーミションの問題 (とくにWindows)があるので，コンテナにはrstudioユーザーで入る。コンテナ構成ファイルに以下を追加すれば良い。
+  ```
+	"remoteUser": "rstudio"
+  ```
 
 ## 参考
 
