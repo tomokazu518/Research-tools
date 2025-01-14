@@ -1,8 +1,7 @@
 services:
   rstudio:
-    build:
-      context: .
-    container_name: Research-tools
+    image: researchtools:latest
+    container_name: tools
     environment:
       - PUID=1000
       - PGID=1000
@@ -13,5 +12,11 @@ services:
     ports:
       - 8787:8787
     volumes:
-      - .:/home/rstudio
+      - ./.config:/home/rstudio/.config
+      - ./.cache:/home/rstudio/.cache
+      - ./.TinyTex:/home/rstudio/.TinyTex
+      - ./.local:/home/rstudio/.local
+      - ./.vscode-server:/home/rstudio/.vscode-server
+      - ./other:/home/rstudio/other
+      - ./projects:/home/rstudio/projects
     restart: unless-stopped

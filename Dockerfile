@@ -53,9 +53,11 @@ RUN echo "copilot-enabled=1" > /etc/rstudio/rsession.conf
 
 # Pandocフィルターのインストール
 ## pandoc-crossref
-RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18.0a/pandoc-crossref-Linux.tar.xz"
-RUN tar xf pandoc-crossref-Linux.tar.xz && \
+RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18.1/pandoc-crossref-Linux-X64.tar.xz"
+RUN tar xf pandoc-crossref-Linux-X64.tar.xz && \
     mv pandoc-crossref /usr/bin
 
 RUN rm /work/*.*
 RUN chown rstudio:rstudio /work && chmod 755 /work
+
+RUN mkdir /home/rstudio/projects && mkdir /home/rstudio/other
