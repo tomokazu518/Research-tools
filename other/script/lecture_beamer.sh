@@ -36,7 +36,7 @@ fi
 
 # Pandocでマークダウンをtexに変換
 pandoc \
---template=/home/rstudio/pandoc/templates/lecture_beamer.latex \
+--template=/home/rstudio/other/templates/lecture_beamer.latex \
 --pdf-engine=xelatex \
 -f markdown-auto_identifiers \
 -F pandoc-crossref \

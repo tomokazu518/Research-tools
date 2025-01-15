@@ -59,5 +59,3 @@ RUN tar xf pandoc-crossref-Linux-X64.tar.xz && \
 
 RUN rm /work/*.*
 RUN chown rstudio:rstudio /work && chmod 755 /work
-
-RUN mkdir /home/rstudio/projects && mkdir /home/rstudio/other

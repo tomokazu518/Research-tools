@@ -14,7 +14,7 @@ services:
     volumes:
       - ./.config:/home/rstudio/.config
       - ./.cache:/home/rstudio/.cache
-      - ./.TinyTex:/home/rstudio/.TinyTex
+      - ./.TinyTeX:/home/rstudio/.TinyTeX
       - ./.local:/home/rstudio/.local
       - ./.vscode-server:/home/rstudio/.vscode-server
       - ./other:/home/rstudio/other
