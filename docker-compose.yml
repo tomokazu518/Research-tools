@@ -11,12 +11,3 @@ services:
       - ROOT=true
     ports:
       - 8787:8787
-    volumes:
-      - ./.config:/home/rstudio/.config
-      - ./.cache:/home/rstudio/.cache
-      - ./.TinyTeX:/home/rstudio/.TinyTeX
-      - ./.local:/home/rstudio/.local
-      - ./.vscode-server:/home/rstudio/.vscode-server
-      - ./other:/home/rstudio/other
-      - ./projects:/home/rstudio/projects
-    restart: unless-stopped

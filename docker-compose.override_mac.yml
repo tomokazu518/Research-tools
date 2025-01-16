@@ -1,0 +1,5 @@
+services:
+  rstudio:
+    volumes: 
+      - ./:/home/rstudio
+    restart: unless-stopped

@@ -6,6 +6,9 @@
 
 !/Dockerfile
 !/docker-compose.yml
+!/docker-compose.override_mac.yml
+!/docker-compose.override_windows.yml
+
 
 !/other**
 !/tasks.json
