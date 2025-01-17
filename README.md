@@ -1,8 +1,10 @@
 # RStudioとLatexの研究環境
 
+RStudioとLatex環境 (tinytex)のDockerコンテナ。ベースイメージはrocker/rstudio。rockerプロジェクトには，tidyverseやLatex環境導入済みのイメージもあるが，柔軟にカスタマイズできるようにrocker/rstudioをベースにした。
+
 ## コンテナの内容
 
-- ベースイメージはrocker/rstudio
+- ベースイメージrocker/rstudioに含まれているもの
   - R本体
   - RStudio Server
   - Pandoc
@@ -30,7 +32,7 @@ git config --global user.email メールアドレス
 
 ### 秘密鍵を作成してGithubに登録
 
-githubのアカウントがあることが前提
+githubのアカウントを作成しておく
  - だれでも作成可能
  - アカデミック申請すれば，Proの機能も無料で使える
  - とくにgithub copilotは便利
