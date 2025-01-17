@@ -11,7 +11,7 @@
             },
             "command": "bash",
             "args": [
-                "/home/rstudio/pandoc/script/lecture_beamer.sh",
+                "/home/rstudio/other/script/lecture_beamer.sh",
                 "-f",
                 "${fileBasename}"
             ],
@@ -29,7 +29,7 @@
             },
             "command": "bash",
             "args": [
-                "/home/rstudio/pandoc/script/lecture_beamer.sh",
+                "/home/rstudio/other/script/lecture_beamer.sh",
                 "-b",
                 "-f",
                 "${fileBasename}"
@@ -48,7 +48,7 @@
             },
             "command": "bash",
             "args": [
-                "/home/rstudio/pandoc/script/lecture_beamer.sh",
+                "/home/rstudio/other/script/lecture_beamer.sh",
                 "-d",
                 "-f",
                 "${fileBasename}"
@@ -67,9 +67,43 @@
             },
             "command": "bash",
             "args": [
-                "/home/rstudio/pandoc/script/lecture_beamer.sh",
+                "/home/rstudio/other/script/lecture_beamer.sh",
                 "-bd",
                 "-f",
+                "${fileBasename}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "gnuplot",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "bash",
+            "args": [
+                "/home/rstudio/other/script/gnuplot.sh",
+                "${fileBasename}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "tikz",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "bash",
+            "args": [
+                "/home/rstudio/other/script/tikz.sh",
                 "${fileBasename}"
             ],
             "problemMatcher": [],
