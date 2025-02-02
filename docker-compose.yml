@@ -11,3 +11,6 @@ services:
       - ROOT=true
     ports:
       - 8787:8787
+    volumes:
+      - ./:/home/rstudio
+    restart: on-failure

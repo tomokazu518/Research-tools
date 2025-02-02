@@ -30,6 +30,7 @@ RUN apt update && apt upgrade -y &&  \
       gnuplot \
       ghostscript \
       # other
+      cmake \
       openssh-client \
       curl \
       xz-utils \
@@ -48,9 +49,6 @@ ENV LC_ALL=en_US.UTF-8
 # renv
 RUN R -e "install.packages('renv')"
 
-## github copilot
-RUN echo "copilot-enabled=1" > /etc/rstudio/rsession.conf
-
 # Pandocフィルターのインストール
 ## pandoc-crossref
 RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18.1/pandoc-crossref-Linux-X64.tar.xz"
@@ -59,3 +57,6 @@ RUN tar xf pandoc-crossref-Linux-X64.tar.xz && \
 
 RUN rm /work/*.*
 RUN chown rstudio:rstudio /work && chmod 755 /work
+
+## github copilot有効化, timeout無効化
+RUN echo "copilot-enabled=1" >> /etc/rstudio/rsession.conf
