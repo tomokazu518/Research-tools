@@ -22,6 +22,7 @@ RUN apt update && apt upgrade -y &&  \
       # sf に必要
       libudunits2-dev \
       libgdal-dev \
+      gdal-bin \
       # fonts
       fonts-ipafont \
       fonts-ipaexfont \
@@ -46,9 +47,6 @@ ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8  
 
-# renv
-RUN R -e "install.packages('renv')"
-
 # Pandocフィルターのインストール
 ## pandoc-crossref
 RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18.1/pandoc-crossref-Linux-X64.tar.xz"
@@ -58,5 +56,5 @@ RUN tar xf pandoc-crossref-Linux-X64.tar.xz && \
 RUN rm /work/*.*
 RUN chown rstudio:rstudio /work && chmod 755 /work
 
-## github copilot有効化, timeout無効化
+## github copilot有効化
 RUN echo "copilot-enabled=1" >> /etc/rstudio/rsession.conf

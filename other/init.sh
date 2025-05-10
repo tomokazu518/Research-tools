@@ -1,7 +1,17 @@
 #!/bin/sh
 
+# Rのパッケージ
+RUN R -e "install.packages('renv')"
+RUN R -e "install.packages('jsonlite')"
+RUN R -e "install.packages('languageserver')"
+RUN R -e "install.packages('remotes')"
+RUN R -e "remotes::install_github('nx10/httpgd')"
+
 # DVC
 pipx install dvc[gdrive]
+
+# radian
+pipx install radian
 
 # tinytex
 R -e 'install.packages("tinytex")'
