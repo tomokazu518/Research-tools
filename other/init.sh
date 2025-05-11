@@ -1,12 +1,5 @@
 #!/bin/sh
 
-# Rのパッケージ
-RUN R -e "install.packages('renv')"
-RUN R -e "install.packages('jsonlite')"
-RUN R -e "install.packages('languageserver')"
-RUN R -e "install.packages('remotes')"
-RUN R -e "remotes::install_github('nx10/httpgd')"
-
 # DVC
 pipx install dvc[gdrive]
 
@@ -32,6 +25,7 @@ gnuplot -e "set term tikz createstyle"
 
 # PATH
 printf "%s\n" \
+
        "export PATH=\$PATH:/home/rstudio/.local/bin" \
        "export PATH=\$(echo \$PATH | awk -v RS=':' '!a[\$1]++ { if (NR > 1) printf RS; printf \$1 }')" \
          > ~/.bashrc
