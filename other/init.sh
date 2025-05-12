@@ -25,10 +25,9 @@ gnuplot -e "set term tikz createstyle"
 
 # PATH
 printf "%s\n" \
-
-       "export PATH=\$PATH:/home/rstudio/.local/bin" \
-       "export PATH=\$(echo \$PATH | awk -v RS=':' '!a[\$1]++ { if (NR > 1) printf RS; printf \$1 }')" \
-         > ~/.bashrc
+  'export PATH=$PATH:/home/rstudio/.local/bin' \
+  'export PATH=$(echo $PATH | awk -v RS=":" '\''!a[$1]++ { if (NR > 1) printf RS; printf $1 }'\'')' \
+  > ~/.bashrc
 echo "source ~/.bashrc" > ~/.bash_profile
 
 # RStudio Font
