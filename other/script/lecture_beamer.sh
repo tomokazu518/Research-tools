@@ -68,6 +68,7 @@ fi
 
 rm $BASENAME-temp.md
 rm $BASENAME.tex
+rm -f .log
 
 if [ ! -d temp ]; then
   exit 0
