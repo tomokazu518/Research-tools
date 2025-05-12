@@ -1,23 +1,23 @@
 #!/bin/sh
 
-# DVC
+# DVC (DVCを使わない場合は不要)
 pipx install dvc[gdrive]
 
-# radian
+# radian (VS CodeもしくはCursorを使わない場合は不要)
 pipx install radian
 
-# tinytex
+# tinytex (QuartoなどでPDFを作成する場合も必要)
 R -e 'install.packages("tinytex")'
 R -e 'tinytex::install_tinytex(force = TRUE)'
 
-# haranoaji font
+## haranoaji font
 ~/.local/bin/tlmgr install haranoaji
 
-# texcount
+## texcount (Latexのコードを書かない場合は不要)
 ~/.local/bin/tlmgr install texcount
 ~/.local/bin/tlmgr path add
 
-# gnuplot-lua-tikz.sty
+## gnuplot-lua-tikz.sty (Latexにgnuplotのグラフを挿入したい場合は必要)
 mkdir -p ~/.TinyTeX/texmf-local/tex/latex/gnuplot
 cd  ~/.TinyTeX/texmf-local/tex/latex/gnuplot
 gnuplot -e "set term tikz createstyle"
@@ -30,7 +30,7 @@ printf "%s\n" \
   > ~/.bashrc
 echo "source ~/.bashrc" > ~/.bash_profile
 
-# RStudio Font
+# RStudio Font (RStudioのインターフェイスでHackGenフォントを使うための設定)
 
 HACKGEN_VER="2.9.0"
 
