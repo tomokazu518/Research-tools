@@ -48,8 +48,8 @@ RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18
 RUN tar xf pandoc-crossref-Linux-X64.tar.xz && \
     mv pandoc-crossref /usr/bin
 
-RUN rm /work/*.*
-RUN chown rstudio:rstudio /work && chmod 755 /work
-
 ## github copilot有効化
 RUN echo "copilot-enabled=1" >> /etc/rstudio/rsession.conf
+
+RUN rm -rf /work
+

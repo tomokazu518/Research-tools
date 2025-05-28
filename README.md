@@ -2,6 +2,7 @@
 
 RStudioとLatex環境 (tinytex)のDockerコンテナ。ベースイメージはrocker/rstudio。rockerプロジェクトには，tidyverseやLatex環境導入済みのイメージもあるが，柔軟にカスタマイズできるようにrocker/rstudioをベースにした。
 
+
 ## コンテナの内容
 
 - ベースイメージrocker/rstudioに含まれているもの
@@ -9,58 +10,18 @@ RStudioとLatex環境 (tinytex)のDockerコンテナ。ベースイメージはr
   - RStudio Server
   - Pandoc
 - 追加したもの
-  - tidyverseとsfをインストールするのに必要なパッケージ   
+  - tidyverseとsfをインストールするのに必要なパッケージ
+  - RStudioでgithub copilotを利用可能に
   - Gnuplot
   - Ghostsctipt
   - IPAフォント，Notoフォント
-  - Rのrenvパッケージ
-  - RStudioでgithub copilotを利用可能に
   - [Pandoc-crosreff](https://github.com/lierdakil/pandoc-crossref)
 
 ## 導入の準備
 
 以下，Windowsの場合はWSL，Macの場合はターミナルでの操作
 
-### gitの初期設定
 
-ユーザー名，メールアドレスを設定する。
-
-```{shell}
-git config --global user.name "ユーザー名"
-git config --global user.email メールアドレス
-```
-
-### 秘密鍵を作成してGithubに登録
-
-githubのアカウントを作成しておく
- - だれでも作成可能
- - アカデミック申請すれば，Proの機能も無料で使える
- - とくにgithub copilotは便利
-
-githubにアクセスするための秘密鍵を作成
-```{shell}
-ssh-keygen -t ed25519
-```
-- 保存場所とパスフレーズを聞かれる
-  - 保存場所はデフォルト(~/.ssh)でOkなので何も入力せずにEnter
-  - パスフレーズも必要なければそのままEnter
-- ~/.sshフォルダにid_ed255119とid_ed25519.pubという2つのファイルができる
-  - 公開鍵 (id_ed25519.pubの方)をテキスト・エディタなどで開いて，内容をコピー
-  - Githubのアカウント設定 (画面右上)からSSH and GPG keysを選び，New SSH keyボタンを押す。Titleは適当に，Keyにはコピーした公開鍵を追加
-
-接続できることを確認
-```
-ssh git@github.com
-```
-次のように表示されればOk
-```
-Hi tomokazu518! You've successfully authenticated, but GitHub does not provide shell access.
-Connection to github.com closed.
-```
-SSH Agentに秘密鍵を登録 (これでコンテナからも設定不要でssh可能)
-```
-ssh-add
-```
 
 ## Dockerでビルドする準備
 
@@ -90,8 +51,8 @@ Research-tools
 ├── Dockerfile
 ├── README.md
 ├── docker-compose.yml
-├── init.sh
-└── pandoc
+└── other
+    ├── init.sh     
     ├── script
     │   ├── gnuplot.sh
     │   ├── lecture_beamer.sh

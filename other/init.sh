@@ -1,37 +1,7 @@
 #!/bin/sh
 
-# DVC (DVCを使わない場合は不要)
-pipx install dvc[gdrive]
-
-# radian (VS CodeもしくはCursorを使わない場合は不要)
-pipx install radian
-
-# tinytex (QuartoなどでPDFを作成する場合も必要)
-R -e 'install.packages("tinytex")'
-R -e 'tinytex::install_tinytex(force = TRUE)'
-
-## haranoaji font
-~/.local/bin/tlmgr install haranoaji
-
-## texcount (Latexのコードを書かない場合は不要)
-~/.local/bin/tlmgr install texcount
-~/.local/bin/tlmgr path add
-
-## gnuplot-lua-tikz.sty (Latexにgnuplotのグラフを挿入したい場合は必要)
-mkdir -p ~/.TinyTeX/texmf-local/tex/latex/gnuplot
-cd  ~/.TinyTeX/texmf-local/tex/latex/gnuplot
-gnuplot -e "set term tikz createstyle"
-~/.local/bin/mktexlsr
-
-# PATH
-printf "%s\n" \
-  'export PATH=$PATH:/home/rstudio/.local/bin' \
-  'export PATH=$(echo $PATH | awk -v RS=":" '\''!a[$1]++ { if (NR > 1) printf RS; printf $1 }'\'')' \
-  > ~/.bashrc
-echo "source ~/.bashrc" > ~/.bash_profile
-
-# RStudio Font (RStudioのインターフェイスでHackGenフォントを使うための設定)
-
+# RStudio ServerにHackGenフォントをインストール
+## HackGenフォントはコードを書くのに適したフォント
 HACKGEN_VER="2.9.0"
 
 mkdir -p /home/rstudio/.config/rstudio/fonts/temp
@@ -67,3 +37,37 @@ fi
     mv temp/HackGen_v$HACKGEN_VER/HackGen35Console-Bold.ttf HackGen35\ Console/700
 
 rm -r temp
+
+# PATH (~/.local/binをPATHに追加)
+
+printf "%s\n" \
+  'export PATH=$PATH:/home/rstudio/.local/bin' \
+  'export PATH=$(echo $PATH | awk -v RS=":" '\''!a[$1]++ { if (NR > 1) printf RS; printf $1 }'\'')' \
+  > ~/.bashrc
+echo "source ~/.bashrc" > ~/.bash_profile
+
+# Latex 関連
+
+## tinytex (QuartoなどでPDFを作成する場合も必要)
+R -e 'install.packages("tinytex")'
+R -e 'tinytex::install_tinytex(force = TRUE)'
+
+## haranoaji font
+~/.local/bin/tlmgr install haranoaji
+
+## texcount (Latexのコードを書かない場合は不要)
+~/.local/bin/tlmgr install texcount
+~/.local/bin/tlmgr path add
+
+## gnuplot-lua-tikz.sty (Latexにgnuplotのグラフを挿入したい場合は必要)
+mkdir -p ~/.TinyTeX/texmf-local/tex/latex/gnuplot
+cd  ~/.TinyTeX/texmf-local/tex/latex/gnuplot
+gnuplot -e "set term tikz createstyle"
+~/.local/bin/mktexlsr
+
+# DVC (DVCを使わない場合は不要)
+pipx install dvc[ssh] # SFTPサーバー用
+#pipx install dvc[gdrive] # Google Drive用
+
+# radian (VS CodeもしくはCursorを使わない場合は不要)
+pipx install radian
