@@ -42,12 +42,6 @@ RUN apt update && apt upgrade -y &&  \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Set the locale
-RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
-ENV LANG=en_US.UTF-8  
-ENV LANGUAGE=en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8  
-
 # Pandocフィルターのインストール
 ## pandoc-crossref
 RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18.1/pandoc-crossref-Linux-X64.tar.xz"
