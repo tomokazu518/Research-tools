@@ -19,6 +19,7 @@ RUN apt update && apt upgrade -y &&  \
       libpng-dev \
       libtiff5-dev \
       libjpeg-dev \
+      libx11-dev \
       # sf に必要
       libudunits2-dev \
       libgdal-dev \
