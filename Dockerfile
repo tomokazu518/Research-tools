@@ -44,7 +44,7 @@ RUN apt update && apt upgrade -y &&  \
 
 # Pandocフィルターのインストール
 ## pandoc-crossref
-RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18.1/pandoc-crossref-Linux-X64.tar.xz"
+RUN wget "https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.19/pandoc-crossref-Linux-X64.tar.xz"
 RUN tar xf pandoc-crossref-Linux-X64.tar.xz && \
     mv pandoc-crossref /usr/bin
 
